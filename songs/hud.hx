@@ -7,6 +7,10 @@ var p1Scale = new FlxBasePoint(1, 1);
 var p2Scale = new FlxBasePoint(1, 1);
 public var currentHUD:FlxSpriteGroup;
 var stars:FlxSpriteGroup;
+
+// so source code doesn't fuck with icon bop.
+doIconBop = false;
+
 function postCreate() {
     
     currentHUD = new FlxSpriteGroup();
@@ -31,8 +35,10 @@ function postCreate() {
         }
         currentHUD.add(pizza);
     }
+
     for (i in [healthBar, healthBarBG, iconP1, iconP2, scoreTxt])
         currentHUD.add(i);
+
     for(i in 0 ... 5) {
         var star = new FlxSprite(healthBar.x + (80 * i) + 40, healthBar.y - 10);
         star.frames = Paths.getFrames('game/star');
@@ -52,19 +58,28 @@ function postUpdate(elapsed:Float) {
         [iconP1, iconP2][i].updateHitbox();
         [iconP1, iconP2][i].offset.set(75, 75);
     }
+    scoreTxt.text = StringTools.replace(scoreTxt.text, ':', ':\n');
+}
+
+// moved to update because postUpdate runs on PauseSubState, meaning uh `update` isnt called so it will just fling the shit
+// down the screen
+function update() {
     for (i => spr in [iconP2, iconP1]) {
         spr.x = currentHUD.members[i].getMidpoint().x;
         spr.y = currentHUD.members[i].getMidpoint().y - 10;
     }
-    scoreTxt.text = StringTools.replace(scoreTxt.text, ':', ':\n');
     scoreTxt.screenCenter().y -= 260;
 }
 function beatHit(beat:Int){
     for (i in 0...2) [p1Scale, p2Scale][i].x = 1.2;
     for (i in stars)
-        if(misses < 5){
-            if(beat % 4 == 0) {i.animation.play("bop", true);}
-        } else {i.animation.play('still', true);}
+        if(misses < 1) {
+            if(beat % 4 == 0) {
+                i.animation.play("bop", true);
+            }
+        } else {
+            i.animation.play('still', true);
+        }
 }
 function updateRatingStuff(){
     if (misses > 0){
