@@ -285,7 +285,6 @@ function postCreate() {
         spr.animation.addByPrefix('scene','i', fpsArray[i], false);
         spr.animation.play('scene', true);
         spr.visible = false;
-        spr.scrollFactor.set();
         scenes.push(spr);
         add(spr);
         
