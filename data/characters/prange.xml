@@ -1,9 +1,0 @@
-<!DOCTYPE codename-engine-character>
-<character x="0" y="0" camx="-160" camy="20" sprite="prange" icon="prange" color="#906000" holdTime="6.1" antialiasing="false">
-	<anim name="idle" anim="idle" fps="30" loop="false" x="0" y="0"/>
-	<anim name="singLEFT" anim="left" fps="30" loop="false" x="78" y="66"/>
-	<anim name="singDOWN" anim="down" fps="30" loop="false" x="76" y="66"/>
-	<anim name="singUP" anim="up" fps="30" loop="false" x="76" y="68"/>
-	<anim name="singRIGHT" anim="right" fps="30" loop="false" x="75" y="67"/>
-	<anim name="showoff" anim="showoff" fps="30" loop="false" x="39" y="67"/>
-</character>
