@@ -1,9 +1,0 @@
-<!DOCTYPE codename-engine-character>
-<character x="0" y="0" camx="-80" camy="90" sprite="prangesneak" icon="prange" color="#7BD6F6" holdTime="6.1" antialiasing="false">
-	<anim name="idle" anim="idle" fps="10" loop="true" x="0" y="0"/>
-	<anim name="singLEFT" anim="left" fps="8" loop="false" x="0" y="0"/>
-	<anim name="singDOWN" anim="down" fps="8" loop="false" x="0" y="0"/>
-	<anim name="singUP" anim="up" fps="8" loop="false" x="0" y="0"/>
-	<anim name="singRIGHT" anim="right" fps="8" loop="false" x="0" y="0"/>
-	<anim name="spin" anim="spin" fps="10" indices="0,1,2,3,4,5,3,1,0,1" loop="false" x="0" y="0"/>
-</character>

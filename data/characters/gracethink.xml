@@ -1,5 +1,0 @@
-<!DOCTYPE codename-engine-character>
-<character x="0" y="0" camx="-340" sprite="gracethink" icon="ourpgf" color="#7BD6F6" antialiasing="false">
-	<anim name="idle" anim="idle" fps="4" loop="true" x="0" y="0"/>
-	<anim name="cheer" anim="cheer" indices="1,2,2,2,2" fps="8" loop="false" x="0" y="0"/>
-</character>
