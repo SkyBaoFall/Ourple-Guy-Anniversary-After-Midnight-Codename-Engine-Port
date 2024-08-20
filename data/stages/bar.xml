@@ -1,0 +1,6 @@
+<!DOCTYPE codename-engine-stage>
+<stage zoom="5" name="bar">
+    <gf x="361" y="220" scroll="1"/>
+	<opponent x="206" y="273"/>
+	<player x="514" y="292"/>
+</stage>

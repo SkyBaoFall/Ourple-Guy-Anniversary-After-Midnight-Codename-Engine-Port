@@ -1,0 +1,9 @@
+<!DOCTYPE codename-engine-character>
+<character isPlayer="true" flipX="true" x="0" y="0" camx="-40" camy="60" sprite="bfwalk" icon="brookearc" color="#7BD6F6" antialiasing="false" holdTime="3.1">
+	<anim name="idle" anim="i" fps="18" loop="false" x="0" y="0"/>
+	<anim name="singLEFT" anim="l" fps="20" loop="false" x="0" y="0"/>
+	<anim name="singDOWN" anim="d" fps="20" loop="false" x="0" y="0"/>
+	<anim name="singUP" anim="u" fps="20" loop="false" x="0" y="0"/>
+	<anim name="singRIGHT" anim="r" fps="20" loop="false" x="0" y="0"/>
+	<anim name="ball" anim="ball" fps="20" loop="true" x="30" y="14"/>
+</character>
