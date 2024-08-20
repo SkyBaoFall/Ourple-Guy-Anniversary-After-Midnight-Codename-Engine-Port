@@ -53,21 +53,21 @@ function postCreate() {
 function postUpdate(elapsed:Float) {
     updateRatingStuff();
     for (i in 0...2) {
-        [p1Scale, p2Scale][i].x = lerp(1, [p1Scale, p2Scale][i].x, FlxMath.bound(1 - (elapsed * 9), 0, 1));
+        [p1Scale, p2Scale][i].x = FlxMath.lerp(1, [p1Scale, p2Scale][i].x, FlxMath.bound(1 - (elapsed * 9), 0, 1));
         [iconP1, iconP2][i].scale.set([p1Scale, p2Scale][i].x, [p1Scale, p2Scale][i].x);
         [iconP1, iconP2][i].updateHitbox();
         [iconP1, iconP2][i].offset.set(75, 75);
     }
-    scoreTxt.text = StringTools.replace(scoreTxt.text, ':', ':\n');
+    for (i => spr in [iconP2, iconP1]) {
+        spr.x = currentHUD.members[i].getMidpoint().x;
+        spr.y = currentHUD.members[i].getMidpoint().y - 10;
+    }
+    scoreTxt.text = "Score:\n"+songScore;
 }
 
 // moved to update because postUpdate runs on PauseSubState, meaning uh `update` isnt called so it will just fling the shit
 // down the screen
 function update() {
-    for (i => spr in [iconP2, iconP1]) {
-        spr.x = currentHUD.members[i].getMidpoint().x;
-        spr.y = currentHUD.members[i].getMidpoint().y - 10;
-    }
     scoreTxt.screenCenter().y -= 260;
 }
 function beatHit(beat:Int){

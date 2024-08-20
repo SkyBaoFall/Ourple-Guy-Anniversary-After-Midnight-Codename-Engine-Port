@@ -285,6 +285,7 @@ function postCreate() {
         spr.animation.addByPrefix('scene','i', fpsArray[i], false);
         spr.animation.play('scene', true);
         spr.visible = false;
+        spr.scrollFactor.set();
         scenes.push(spr);
         add(spr);
         
@@ -312,6 +313,38 @@ function onEvent(_) {
     var e = _.event;
     var name = e.name;
     var params = e.params;
+    trace("Name: " + name + " | Params: " + params);
+    switch (name) {
+        case "Play Animation":
+            switch (params[0]) {
+                case 'ball':
+                    if (params[1] == 1) {
+                        legs.kill();
+                        FlxTween.tween(boyfriend, {y: 156 + 80}, 0.3, {ease: FlxEase.expoOut, onComplete: function(twn){
+                            FlxTween.tween(boyfriend, {y: 206 + 80}, 0.2, {ease: FlxEase.quadIn, startDelay: 0.05});
+                        }});
+                        FlxTween.tween(boyfriend, {x: 470}, 0.6, {ease: FlxEase.quadOut, onComplete: function(twn){
+                            boyfriend.visible = false;
+                            brookesit.visible = true;
+                            brookesit.scale.set(1.1,0.9);
+                            FlxTween.tween(brookesit.scale, {x: 1, y: 1},0.1);
+                        }});
+                    } else if (params[1] == 2) {
+                        legs.kill();
+                        FlxTween.tween(boyfriend, {y: 156 + 80}, 0.3, {ease: FlxEase.expoOut, onComplete: function(twn){
+                            FlxTween.tween(boyfriend, {y: 206 + 80}, 0.2, {ease: FlxEase.quadIn, startDelay: 0.05});
+                        }});
+                        FlxTween.tween(boyfriend, {x: 470}, 0.6, {ease: FlxEase.quadOut, onComplete: function(twn){
+                            boyfriend.visible = false;
+                            brookesit.visible = true;
+                            brookesit.scale.set(1.1,0.9);
+                            FlxTween.tween(brookesit.scale, {x: 1, y: 1},0.1);
+                        }});
+                    }
+            }
+            case "spin":
+                // idk what goes here, so uh put your fucking prangspin code here
+    }
     if (name == 'brookecam'){
             boyfriend.animation.callback = null;
             moveCam(false);
@@ -473,30 +506,6 @@ function onEvent(_) {
         FlxTween.tween(boyfriend, {x: boyfriend.x + 100, alpha: 0}, 0.7, {ease: FlxEase.quartInOut});
         FlxTween.tween(gf, {x: gf.x + 100, alpha: 0}, 0.7, {ease: FlxEase.quartInOut});
         FlxTween.tween(dad, {x: dad.x - 100, alpha: 0}, 0.7, {ease: FlxEase.quartInOut});
-    }
-    if (name == 'Play Animation' && params[0] == 'ball' && params[1] == 1) {
-        legs.kill();
-        FlxTween.tween(boyfriend, {y: 156 + 80}, 0.3, {ease: FlxEase.expoOut, onComplete: function(twn){
-            FlxTween.tween(boyfriend, {y: 206 + 80}, 0.2, {ease: FlxEase.quadIn, startDelay: 0.05});
-        }});
-        FlxTween.tween(boyfriend, {x: 470}, 0.6, {ease: FlxEase.quadOut, onComplete: function(twn){
-            boyfriend.visible = false;
-            brookesit.visible = true;
-            brookesit.scale.set(1.1,0.9);
-            FlxTween.tween(brookesit.scale, {x: 1, y: 1},0.1);
-        }});
-    }
-    if (name == 'Play Animation' && params[0] == 'ball' && params[1] == 2) {
-        legs.kill();
-        FlxTween.tween(gf, {y: 156 + 80}, 0.3, {ease: FlxEase.expoOut, onComplete: function(twn){
-            FlxTween.tween(gf, {y: 198 + 80}, 0.2, {ease: FlxEase.quadIn, startDelay: 0.05});
-        }});
-        FlxTween.tween(gf, {x: 586}, 0.6, {ease: FlxEase.quadOut, onComplete: function(twn){
-            gf.playAnim('sit', true);
-            gf.setPosition(567, 192 + 80);
-            gf.scale.set(1.1,0.9);
-            FlxTween.tween(gf.scale, {x: 1, y: 1},0.1);
-        }});
     }
     if (name == 'Change Character' && params[1] == 'prangesneak'){
         dad.setPosition(-81, 165 + 80);
@@ -671,7 +680,7 @@ function moveCam(move:Bool, ?char = lime){
         cam_DISPLACEMENT.put();
     }else {allowMoveCam = true;}
 }
-
+introLength = 0.0001; // basically instant start countdown
 function onCountdown(event) {
     event.cancel();
 }
