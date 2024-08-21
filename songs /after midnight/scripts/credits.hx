@@ -1,6 +1,6 @@
 import flixel.text.FlxTextFormatMarkerPair;
 import flixel.text.FlxTextFormat;
-import flixel.text.FlxTextAlign;
+
 import flixel.text.FlxTextBorderStyle;
 
 var creditFrame:FlxSprite;

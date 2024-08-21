@@ -3,12 +3,13 @@ import flixel.math.FlxMath;
 import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxTextBorderStyle;
 
-var p1Scale = new FlxBasePoint(1, 1);
-var p2Scale = new FlxBasePoint(1, 1);
+
+
 public var currentHUD:FlxSpriteGroup;
 var stars:FlxSpriteGroup;
+
 function postCreate() {
-    
+    doIconBop = false; // aren't remember it exits
     currentHUD = new FlxSpriteGroup();
     add(currentHUD);
     currentHUD.cameras = [camHUD];
@@ -44,27 +45,32 @@ function postCreate() {
     }
     currentHUD.add(stars);
 }
+function update() {
+    scoreTxt.text = 'Score:\n'+songScore;
+    scoreTxt.screenCenter().y -= 260;
+}
 function postUpdate(elapsed:Float) {
     updateRatingStuff();
-    for (i in 0...2) {
-        [p1Scale, p2Scale][i].x = lerp(1, [p1Scale, p2Scale][i].x, FlxMath.bound(1 - (elapsed * 9), 0, 1));
-        [iconP1, iconP2][i].scale.set([p1Scale, p2Scale][i].x, [p1Scale, p2Scale][i].x);
-        [iconP1, iconP2][i].updateHitbox();
-        [iconP1, iconP2][i].offset.set(75, 75);
+    for (i in [iconP1, iconP2]) {
+        var tho = lerp(1, i.scale.x, FlxMath.bound(1 - (elapsed * 9), 0, 1));
+        i.scale.set(tho, tho);
+        i.updateHitbox();
+        i.offset.set(75, 75);
     }
     for (i => spr in [iconP2, iconP1]) {
         spr.x = currentHUD.members[i].getMidpoint().x;
         spr.y = currentHUD.members[i].getMidpoint().y - 10;
     }
-    scoreTxt.text = StringTools.replace(scoreTxt.text, ':', ':\n');
+    scoreTxt.text = 'Score:\n'+songScore;
     scoreTxt.screenCenter().y -= 260;
 }
 function beatHit(beat:Int){
-    for (i in 0...2) [p1Scale, p2Scale][i].x = 1.2;
+    for (i in [iconP1, iconP2]) i.scale.x = 1.2;
     for (i in stars)
         if(misses < 5){
             if(beat % 4 == 0) {i.animation.play("bop", true);}
         } else {i.animation.play('still', true);}
+    
 }
 function updateRatingStuff(){
     if (misses > 0){
